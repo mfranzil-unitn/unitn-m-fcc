@@ -1,0 +1,3 @@
+[submodule "paas-lab-fcc"]
+	path = paas-lab-fcc
+	url = https://gitlab.fbk.eu/dsantoro/paas-lab-fcc
