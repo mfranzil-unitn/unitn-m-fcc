@@ -1,0 +1,10 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: clocke12
+  namespace: default
+spec:
+  containers:
+  - name: clock
+    image: jpetazzo/clock
+  
