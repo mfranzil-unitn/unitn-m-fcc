@@ -1,0 +1,38 @@
+\section{Infrastructure as a Service}
+\label{cha:iaas}
+In this section we are explaining how we are applying the concepts and technologies gathered during the \verb=IaaS= laboratory.
+\newline
+We are going to create a new user from scratch for the OpenStack management and also a new associated project, so that we will simulate someone working on a clean OpenStack project; we will only setup the \verb=PaaS= and \verb=IaaS= connectivity in advance.
+
+\subsection{Local artifact manager}
+Since using Kubernetes implies the usage of Docker images, we wanted to avoid storing them on the \verb=PaaS= machine - as we want it to be fully dedicated to our web server and database for maximum performance. % but we do not really want to use the machine on which the clusters will run also as a storage for those images, because that would mean that we have to develop the application, create the image and then upload it to the machine running Kubernetes, which we want to be fully dedicated to Kubernetes.
+\newline
+We therefore plan to use OpenStack to deploy an instance which will serve as an \textit{image manager}, enabling us to create the images and push them to the instance via the \mintinline{bash}{docker push} command. % (solo se necessario) Kubernetes deployments will use a secret in order to connect to that instance and to gather the necessary image.
+\newline
+For this we are currently exploring alternatives: we found some commercial software, such as \href{https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=11007065731&gclid=Cj0KCQjw-LOEBhDCARIsABrC0TnZ212Fk7c3MtotiYg5Zj9HIu-aWW_Ih3kIkz_2Fak0bys6JJxq5_MaAtDNEALw_wcB}{JFrog}, and also some open source software like \href{https://goharbor.io/}{Harbor} and \href{https://docs.docker.com/registry/}{Docker} itself; we are exploring the features of every artifact manager and will choose one that will best fit our needs on both performance and security.%and will use the one that best fits our needs also considering that we want to keep an eye on the security of the images deployed on Kubernetes.
+\newline
+This instance will be running a currently undefined version of Ubuntu and will be exposed via a floating IP and/or a static URL, depending on the result of our findings about the DNS Resolver.
+
+\subsection{DNS resolver}
+Since in 2021 proposing a Web Application demo with raw IP addresses connections sounded a bit old school, we plan to deploy a DNS Resolver to make all the services accessible as URLs and not as IP address. Our idea is that every instance on the project will be reachable through a \verb=FQDN=, including both machines, the web server, the database, and so forth, enabling flexibility on app deployment and resource utilization.%both the machine running Kubernetes and the machine running OpenStack will also be reachable through this DNS, as well as all the web app components running on both systems. The main idea is to provide users the flexibility to make applications and resources accessible also via static URLs.
+\newline
+This is the part about which we are more worried: we are currently exploring the capabilities of the \textit{Neutron} component of OpenStack and deciding whether it is better to use it or to deploy a dedicated instance, running probably a Debian-based Linux distribution; of course this will need to have a Floating IP in order to make it accessible from the outside.
+
+\subsection{Resource server}
+This will be the last component of the web application: it will an instance deployed on OpenStack with a volume attached containing all the resources (e.g. images, PDFs, reports...). It will assist the web server in delivering content without setting up a whole NoSQL database. Depending on our findings on the DNS Resolver it may be associated with a Floating IP and/or to a public URL through the resolver.
+
+\subsection{Flavors and resource usage}
+We plan to use the following, custom-defined flavors for the three machines. In all three cases, the ephemeral disk and swap values will be set to \verb=0=, and the root disk size will be small to allocate larger sizes for the volumes. CPU overcommitting allows us to use more than the four cores attached to the \verb=IaaS= machine. The artifact manager needs balanced performance, a DNS server is usually low on RAM requirements but multiple \verb=vCPUs= might help, and the resource server has higher overall requirements in order to provide better performance to the web server.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+Name      & \verb=art-flv= & \verb=dns-flv= & \verb=res-fv= \\
+\hline
+VCPUs     & \verb=2=       & \verb=4=       & \verb=6=      \\
+Memory    & \verb=2GB=     & \verb=1GB=     & \verb=4GB=    \\
+Root Disk & \verb=4GB=     & \verb=2GB=     & \verb=4GB=    \\
+\hline
+\end{tabular}
+\end{table}

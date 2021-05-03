@@ -1,0 +1,8 @@
+%In this section we are going to explain the architecture of the application that we are going to use as a demo in order to prove that the architecture we're going to implement works.
+\section{Sample Application}
+\label{cha:sampleapp}
+Our first building block will be an application developed by Matteo Franzil as the final project for a web programming course. It was originally devised to run on a Tomcat application server on bare metal, with no cloud approach in mind. 
+\newline
+Its purpose is to allow citizens to access their sanitary information in an intuitive and simple portal while allowing doctors, chemists' and local sanitary services to interact with patients, prescriptions, and more. It integrated features such as Excel report generation, prescription PDF generations with QR codes, and more.
+\newline
+The application is logically divided into three components. Their deployment will be shown in later sections: the \textbf{web server}, handling the logic and providing the HTML dynamic pages, the \textbf{database}, for storing data about patients, doctors, prescriptions and so on, and the \textbf{resources}, like reports, prescriptions, and patient images.

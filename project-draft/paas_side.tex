@@ -1,0 +1,17 @@
+\section{Platform as a Service}
+\label{cha:paas}
+In this section we are explaining how we are applying the concepts and technologies gathered during the \verb=PaaS= laboratory.
+\newline
+We plan to create both a new user and a new cluster, in order to simulate a company working on a fresh Kubernetes environment.
+
+\subsection{Kubernetes}
+We plan to use the \verb=PaaS= machine as a resource orchestrator using Kubernetes. We will create two main \verb=ReplicaSets=:
+
+\begin{itemize}
+    \item \textbf{web server} RS: containing 3 to 5 pods and an alias, in order to ensure maximum performance and load balancing, depending on usage;%this is necessary because taking into account the application the access should always be fast. In front of these pods there will be a load balancer with an alias.
+    \item \textbf{database} RS: containing just one pod for the moment. We are locked to using Postgres as a \verb=DBMS=: if we were to switch to a distributed or NoSQL \verb=DBMS= we may scale number of pods to 2 and include an alias and a load balancer. In either case we plan to deploy a volume on Kubernetes for data persistency through the pod's destruction and re-creation.
+\end{itemize}
+
+Of course, both pods will feature "packaged" web server and database docker images so that they can be completely decoupled. Finally, we are still investigating whether to deploy a single or two different namespaces (one for testing and one for production), and we may plan to stick to two in order to demonstrate how flexible Kubernetes is and how easy it is to create two namespaces for the same application but with just a different purpose.%in order to handle both the database and the web server components: each of them will be a separate deployment, with different desired states, but under the same namespace.Probably there will actually be two different namespaces for this application: one for testing and one for production, Taking into account just one of the namespaces these should be the ideal states for the deployments:
+\newline
+Depending on the result of the DNS Resolver findings we could also create an ingress for the load balancer service for the production deployment "Web Server" so that it is accessible from the outside world via a URL.
