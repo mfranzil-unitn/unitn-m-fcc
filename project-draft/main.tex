@@ -1,0 +1,70 @@
+\documentclass[epsfig,a4paper,11pt,titlepage,hidelinks]{article}
+\usepackage[a-1b]{pdfx}
+\usepackage[pdfa]{hyperref}
+
+\usepackage{subfiles}
+\usepackage{epsfig}
+\usepackage{plain}
+\usepackage{setspace}
+\usepackage{minted}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathabx}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage[english]{babel}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=1.8cm]{geometry}
+\usepackage{titlesec} 
+\usepackage[utf8x]{inputenc} 
+
+\usepackage{draftwatermark}
+\SetWatermarkLightness{0.95}
+\SetWatermarkScale{6}
+
+\tcbuselibrary{minted}
+
+\hypersetup{colorlinks=true, urlcolor=blue}
+
+\captionsetup{
+  justification=centering,
+  singlelinecheck=false,
+  font=small,labelfont=bf,labelsep=space}
+
+\begin{document}
+
+\pagenumbering{gobble} % nessuna numerazione
+
+\input{first_page}
+
+\pagestyle{plain} 
+
+\begingroup
+
+\renewcommand{\cleardoublepage}{}
+\renewcommand{\clearpage}{}
+
+\titleformat{\section}
+{\normalfont\LARGE\bfseries}{\thesection}{1em}{}
+
+\titlespacing{\section}{0pt}{0.20in}{0.02in}
+\titlespacing{\subsection}{0pt}{0.10in}{0.02in}
+
+\newpage
+
+\input{introduction}
+\input{sample_application}
+\input{paas_side}
+\input{iaas_side}
+
+\endgroup
+\titleformat{\section}{\normalfont\LARGE\bfseries}{Attachment \thesection}{1em}{}
+
+\appendix
+\clearpage
+\input{diagrams}
+
+\end{document}
