@@ -1,0 +1,2 @@
+kubectl delete all --all
+
