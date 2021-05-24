@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: centodiciotto-psql
+  labels:
+    app: centodiciotto
+spec:
+  type: NodePort
+  clusterIP: 10.96.60.230
+  ports:
+   - port: 5432
+     targetPort: 5432
+     nodePort: 30100
+     protocol: TCP
+  selector:
+   app: centodiciotto
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: centodiciotto-psql
+  labels:
+    app: centodiciotto
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: centodiciotto
+  template:
+    metadata:
+      labels:
+        app: centodiciotto
+    spec:
+      containers:
+        - name: centodiciotto-psql
+          image: mfranzil/centodiciotto-psql:2.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: centodiciotto-psql-db
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred
+                  key: password
+      volumes:
+        - name: centodiciotto-psql-db
+          persistentVolumeClaim:
+            claimName: centodiciotto-psql-pv-claim

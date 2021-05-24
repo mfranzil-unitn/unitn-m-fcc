@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-cred
+type: kubernetes.io/basic-auth
+stringData:
+  username: ***REMOVED***
+  password: ***REMOVED***
