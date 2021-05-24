@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: centodiciotto-ws
+  labels:
+    app: centodiciotto
+spec:
+  clusterIP: 10.96.60.130
+  ports:
+   - port: 80
+     targetPort: 8080
+     protocol: TCP
+  selector:
+   app: centodiciotto
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: centodiciotto-ws
+  labels:
+    app: centodiciotto
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: centodiciotto
+  template:
+    metadata:
+      labels:
+        app: centodiciotto
+    spec:
+      containers:
+        - name: centodiciotto-ws
+          image: mfranzil/centodiciotto:2.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
