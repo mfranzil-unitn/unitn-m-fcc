@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: centodiciotto-ws
-          image: mfranzil/centodiciotto:2.0.1
+          image: ***REMOVED***/centodiciotto:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

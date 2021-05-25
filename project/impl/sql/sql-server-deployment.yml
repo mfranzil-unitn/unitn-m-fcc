@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
         - name: centodiciotto-psql
-          image: mfranzil/centodiciotto-psql:2.0.1
+          image: ***REMOVED***/centodiciotto-psql:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 5432

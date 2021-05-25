@@ -1,0 +1,6 @@
+/etc/dhcp/dhclient.conf
+thisismypasswordnoonewillremember
+sudo ip route add 192.168.233.0/24 via 172.24.4.205
+openstack subnet set --dns-nameserver 192.168.233.2 shared-subnet
+
+while true; do date | sudo nc -l -p 80; sleep 0.5; done
