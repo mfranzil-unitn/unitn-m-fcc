@@ -48,7 +48,7 @@ PAAS_SITE=$(ssh ${LOGIN}@${PAAS_HOST} hostname) # paas-19
 
 : ${EVAL_ACC:=eval}
 
-: ${SOCKS_PORT:=4444}
+: ${SOCKS_PORT:=8888}
 ```
 
 For the remote hosts:
@@ -163,14 +163,28 @@ curl ${RESOURCE_SERVER}/${RESOURCE} -i -X PUT -H "X-Auth-Token: ${PROJECT_REST_T
 
 #### Nova, compute instances: Docker Registry
 
-Our OpenStack machine hosts a Docker Registry, which is nothing less than a Docker installation working as an endpoint for pushing images.
+Our OpenStack machine hosts a Docker Registry, which is nothing less than a Docker installation working as an endpoint for pushing images. We can SSH to it with user `debian` and the SSH key in the folder.
 
-First, we need to set up tunneling for connecting from localhosts:
+First, we need to set up tunneling for connecting from localhosts using the classic SOCKS method. Then, we log in:
 
 ```shell
-ssh -L ${DOCKER_REG_PORT}:${DOCKER_REG_IP}:${DOCKER_REG_PORT} ${LOGIN}@${IAAS_HOST}
-
 docker login ${DOCKER_REG_IP}:${DOCKER_REG_PORT} # provide ${DOCKER_REG_USER}, ${DOCKER_REG_PASSWORD}
+```
+
+On Windows machines, we need to edit the proxy settings on Docker Desktop and add under the Resources > Proxies > HTTP Proxy `socks5://127.0.0.1:${SOCKS_PORT}`. On Linux machines, we append the following lines to the `/etc/systemd/system/docker.service.d/http-proxy.conf`
+ file:
+
+```shell
+[Service]
+Environment="HTTP_PROXY=socks5://127.0.0.1:${SOCKS_PORT}"
+```
+
+Finally, on the `dockerd` file we add:
+
+```shell
+"insecure-registries": [
+  "${DOCKER_REG_IP}:8081"
+]
 ```
 
 Then, we push our stuff:
@@ -248,6 +262,7 @@ psql postgresql://${SQL_USER}:${SQL_PASSWORD}@${MASTER_IP}:${SQL_PORT_EXT}/${SQL
 ```
 
  CREDENZIALI  per il cluster PAAS
+credenzial per nvm eval
 verificare funzionamento ingress
 verificare tutta sta roba sopra
 helm project
