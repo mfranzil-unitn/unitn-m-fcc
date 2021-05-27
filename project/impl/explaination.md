@@ -81,14 +81,7 @@ First, we need to set up tunneling for connecting from localhosts using the clas
 docker login ${DOCKER_REG_IP}:${DOCKER_REG_PORT} # provide ${DOCKER_REG_USER}, ${DOCKER_REG_PASSWORD}
 ```
 
-We can now push stuff to the Docker Registry using its IP and port as repository prefix.
-
-```shell
-docker tag ${WS_IMAGE}:latest ${DOCKER_REG_IP}:${DOCKER_REG_PORT}/${WS_IMAGE}:${CURRENT_VERSION:=a.b.c}
-docker tag ${WS_IMAGE}:latest ${DOCKER_REG_IP}:${DOCKER_REG_PORT}/${WS_IMAGE}:latest
-docker push ${DOCKER_REG_IP}:${DOCKER_REG_PORT}/${WS_IMAGE}:${CURRENT_VERSION}
-docker push ${DOCKER_REG_IP}:${DOCKER_REG_PORT}/${WS_IMAGE}:latest
-```
+We can now push stuff to the Docker Registry using its IP and port as repository prefix. Please use the provided script.
 
 ### PAAS-19
 
@@ -117,7 +110,7 @@ For re-deploying everything
 kubectl apply -f sql-server-deployment.yml; kubectl apply -f web-server-deployment;
 ```
 
-For rolling update:
+For rolling update, use the provided file.
 
 #### Web server details
 

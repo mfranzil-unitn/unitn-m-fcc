@@ -5,10 +5,12 @@ metadata:
   labels:
     app: centodiciotto
 spec:
+  type: NodePort
   clusterIP: 10.96.60.130
   ports:
    - port: 80
      targetPort: 8080
+     nodePort: 30200
      protocol: TCP
   selector:
    app: centodiciotto
@@ -29,9 +31,11 @@ spec:
       labels:
         app: centodiciotto
     spec:
+      imagePullSecrets:
+      - name: regcred
       containers:
         - name: centodiciotto-ws
-          image: ***REMOVED***/centodiciotto:latest
+          image: ***REMOVED***:8081/centodiciotto-ws:2.0.2
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

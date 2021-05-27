@@ -31,9 +31,11 @@ spec:
       labels:
         app: centodiciotto
     spec:
+      imagePullSecrets:
+      - name: regcred
       containers:
         - name: centodiciotto-psql
-          image: ***REMOVED***/centodiciotto-psql:latest
+          image: ***REMOVED***:8081/centodiciotto-psql:2.0.2
           imagePullPolicy: Always
           ports:
             - containerPort: 5432
