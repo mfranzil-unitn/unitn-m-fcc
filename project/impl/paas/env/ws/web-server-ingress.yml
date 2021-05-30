@@ -3,8 +3,13 @@ kind: Ingress
 metadata:
   name: centodiciotto-ingress
 spec:
-  defaultBackend:
-    service:
-      name: centodiciotto-ws
-      port:
-        number: 80
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: centodiciotto-ws
+                port:
+                  number: 8080
