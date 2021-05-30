@@ -36,7 +36,6 @@ spec:
       containers:
         - name: centodiciotto-psql
           image: 172.24.4.144:8081/centodiciotto-psql:2.0.2
-          imagePullPolicy: Always
           ports:
             - containerPort: 5432
           volumeMounts:
