@@ -1,6 +1,7 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
+  namespace: centodiciotto-dev
   name: centodiciotto-psql-pv-volume
   labels:
     type: local
@@ -18,6 +19,7 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
+  namespace: centodiciotto-dev
   name: centodiciotto-psql-pv-claim
   labels:
     app: centodiciotto
