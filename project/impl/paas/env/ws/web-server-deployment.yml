@@ -1,9 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: centodiciotto-dev
   name: centodiciotto-ws
   labels:
     app: centodiciotto
+    component: ws
 spec:
   type: NodePort
   clusterIP: 10.96.60.130
@@ -14,13 +16,16 @@ spec:
      protocol: TCP
   selector:
    app: centodiciotto
+   component: ws
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: centodiciotto-dev
   name: centodiciotto-ws
   labels:
     app: centodiciotto
+    component: ws
 spec:
   replicas: 3
   selector:
@@ -30,9 +35,10 @@ spec:
     metadata:
       labels:
         app: centodiciotto
+        component: ws
     spec:
       imagePullSecrets:
-      - name: regcred
+      - name: secret-docker-cred
       containers:
         - name: centodiciotto-ws
           image: ***REMOVED***:8081/centodiciotto-ws:2.0.2

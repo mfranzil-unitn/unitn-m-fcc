@@ -75,31 +75,7 @@ Finally, on the `dockerd` file we add:
 
 ## Installing the Kubernetes Ingress and Config
 
-For applying everything once the cluster is
-
-```shell
-kubectl apply -f db-cred.yml
-kubectl apply -f sql-server-pv.yml 
-kubectl apply -f sql-server-deployment.yml 
-```
-
-(wait 10 seconds)
-
-```shell
-kubectl apply -f web-server-deployment.yml 
-kubectl apply -f web-server-ingress.yml 
-```
-
-For installing the ingress:
-
-```shell
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml
-kubectl label node ${CLUSTER_NAME}-control-plane ingress-ready=true
-kubectl wait --namespace ingress-nginx \
---for=condition=ready pod \
---selector=app.kubernetes.io/component=controller \
---timeout=30s
-```
+For applying everything once the cluster is up, use `0-deploy-everything.sh`
 
 ## Testing Docker images (on local)
 
