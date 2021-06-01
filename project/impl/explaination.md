@@ -21,7 +21,7 @@ The project is composed of the following structure:
     - Cluster
       - Control Plane (172.18.0.1)
       - Worker Node (172.18.0.2)
-        - Web Server Service/Deployment (10.96.60.130; ClusterIP 8080->80/TCP; namespace default)
+        - Web Server Service/Deployment (10.96.60.130; ClusterIP 8080->80:30200/TCP; namespace default)
         - SQL Server Service/Deployment (10.96.60.230; NodePort 5432->5432:30100/TCP; namespace default)
         - NGINX Ingress (80/TCP; namespace ingress-nginx)
   - Helm (project)
@@ -96,7 +96,6 @@ Possible targets:
 -X GET https://***REMOVED***:8081/v2/<image>/tags/list/ -i
 -X DELETE https://***REMOVED***:8081/v2/<image>/manifests/<reference>
 ```
-
 
 ### PAAS-19
 
