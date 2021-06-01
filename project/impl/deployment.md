@@ -35,7 +35,7 @@ Passphrase: ${EVAL_ACC}-fcc21-group${GROUP_NUM}
 
 ### Providing SSH keys to the IAAS::eval user
 
-Just do again the previous paragraph, stashing the private key in the (IAAS) evaluation user SSH folder and the public one in the NVM. 
+Just do again the previous paragraph, stashing the private key in the (IAAS) evaluation user SSH folder and the public one in the NVM.
 
 ### Providing OpenStack access to the IAAS::eval user
 
