@@ -11,8 +11,8 @@ kubectl create namespace centodiciotto-dev;
 kubectl apply -f sql/secret-sql-cred.yml;
 kubectl apply -f secret-docker-cred.yml;
 # SQL Server
-kubectl apply -f sql-server-pv.yml;
-kubectl apply -f sql-server-deployment.yml;
+kubectl apply -f sql/sql-server-pv.yml;
+kubectl apply -f sql/sql-server-deployment.yml;
 ## Web Server
-kubectl apply -f web-server-deployment.yml;
-kubectl apply -f web-server-ingress.yml;
+kubectl apply -f ws/web-server-deployment.yml;
+kubectl apply -f ws/web-server-ingress.yml;
