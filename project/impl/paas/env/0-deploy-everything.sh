@@ -1,3 +1,8 @@
+# Certificates
+docker cp /etc/docker/certs.d/172.24.4.144\:8081/ca.crt $(docker ps --filter NAME=eval-control-plane -q):/usr/local/share/ca-certificates/ca.crt;
+docker exec -it $(docker ps --filter NAME=eval-control-plane -q) /bin/bash update-ca-certificates;
+sudo systemctl daemon-reload;
+sudo systemctl restart docker;
 # NGINX Ingress
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml;
 kubectl label node ${CLUSTER_NAME}-control-plane ingress-ready=true;
