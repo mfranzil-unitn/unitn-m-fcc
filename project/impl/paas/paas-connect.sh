@@ -6,11 +6,11 @@ fi
 
 scp ${LOGIN}@${PAAS_HOST}:~/.profile ./
 
-if grep -q "source env/.env.paas.sh; source env/.env.docker.sh" .profile; then
+if grep -q "source env/.env.docker.sh; source env/.env.paas.sh" .profile; then
     echo "Environment ready, connecting..."    
 else
     cp .profile .profile_old
-    echo "source env/.env.paas.sh; source env/.env.docker.sh" >> .profile
+    echo "source env/.env.docker.sh; source env/.env.paas.sh" >> .profile
     echo "Updating .profile file for new environment..."
     scp .profile ${LOGIN}@${PAAS_HOST}:~/
 fi

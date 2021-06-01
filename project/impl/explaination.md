@@ -36,29 +36,7 @@ The environment variables can be found in the respective files.
 
 #### Keystone, identity management
 
-First, we need to authenticate against Keystone for accessing the resource servers. These are the snippets:
-
-```shell
-echo TOKEN: TOKEN=$(curl -i -H "Content-Type: application/json" -d '{ "auth": {
-    "identity": {
-      "methods": ["password"],
-      "password": {
-        "user": {
-          "name": "${OS_USERNAME}",
-          "domain": { "id": "${OS_PROJECT_DOMAIN_ID}" },
-          "password": "${OS_PASSWORD}"
-        }
-      }
-    },
-    "scope": {
-      "project": {
-        "name": "${OS_PROJECT_NAME}",
-        "domain": { "id": "${OS_PROJECT_DOMAIN_ID}" }
-      }
-    }
-  }
-}' "${IDENTITY_SERVER}" | tee response.txt | grep X-Subject-Token | sed "s/X-Subject-Token: //")
-```
+First, we need to authenticate against Keystone for accessing the resource servers. We run the `1_auth_token.sh` script.
 
 This token must then be used in PUT requests (GET requests do not require authentication) towards the server.
 Its duration is specified in the response payload (saved in response.txt).
@@ -68,32 +46,29 @@ Its duration is specified in the response payload (saved in response.txt).
 The Resource server is provided by OpenStack directly using the Swift API. Its function is to provide a distributed data storage for the web application with a RESTful API. After being created, we inserted the required assets by our application.
 
 ```shell
-curl ${RESOURCE_SERVER}/${RESOURCE} -i -X PUT -H "X-Auth-Token: ${PROJECT_REST_TOKEN}" 
+curl ${RESOURCE_SERVER}/${RESOURCE} -i -X PUT -H "X-Auth-Token: ${TOKEN}" 
+curl ${RESOURCE_SERVER}/ -i -X GET -H "X-Auth-Token: ${TOKEN}" 
 ```
 
 #### Nova, compute instances: Docker Registry
 
 Our OpenStack machine hosts a Docker Registry, which is nothing less than a Docker installation working as an endpoint for pushing images. We can SSH to it with user `debian` and the SSH key in the folder.
 
-First, we need to set up tunneling for connecting from localhosts using the classic SOCKS method (make sure proxying is on). Then, we log in:
-
-```shell
-docker login ${DOCKER_REG_IP}:${DOCKER_REG_PORT} # provide ${DOCKER_REG_USER}, ${DOCKER_REG_PASSWORD}
-```
+First, we need to set up tunneling for connecting from localhosts using the classic SOCKS method (make sure proxying is on). Then, we log in. This is automatically done by the `.env.iaas.sh` script.
 
 We can now push stuff to the Docker Registry using its IP and port as repository prefix. Please use the provided script.
 
 Docker Registry v2 has a good API. We can use it as following:
 
 ```shell
-curl -v --silent -s -i -H "Content-Type: application/json; Accept: application/vnd.docker.distribution.manifest.v2+json" -u ${DOCKER_REG_USER}:${DOCKER_REG_PASSWORD} 
+curl -v --silent -s -i --insecure -H "Content-Type: application/json; Accept: application/vnd.docker.distribution.manifest.v2+json" -u ${DOCKER_REG_USER}:${DOCKER_REG_PASSWORD} 
 ```
 
 Possible targets:
 
 ```shell
--X GET https://172.24.4.144:8081/v2/_catalog/ -
--X GET https://172.24.4.144:8081/v2/<image>/tags/list/ -i
+-X GET https://172.24.4.144:8081/v2/_catalog
+-X GET https://172.24.4.144:8081/v2/<image>/tags/list
 -X DELETE https://172.24.4.144:8081/v2/<image>/manifests/<reference>
 ```
 
@@ -115,8 +90,6 @@ These commands apply the configuration and the Ingress.
 For quick deletion of everything: see script in env folder.
 
 For re-deploying everything: see script in env folder.
-
-For deleting pv/pvc: use the provided file in env folder.
 
 For rolling update, use the provided file in env folder.
 
