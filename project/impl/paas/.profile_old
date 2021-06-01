@@ -26,3 +26,4 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+source env/.env.paas.sh; source env/.env.docker.sh

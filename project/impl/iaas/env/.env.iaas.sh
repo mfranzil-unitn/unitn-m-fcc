@@ -16,7 +16,6 @@ export IDENTITY_SERVER=${OS_AUTH_URL}/v3/auth/tokens
 export EVAL_ACC=eval
 export EVAL_PASSWORD=eval
 # NVM Docker Reg
-export DOCKER_REG_IP=***REMOVED***
 export DOCKER_REG_KEY=.ssh/docker-reg-priv
 if [ -f "$DOCKER_REG_KEY" ]; then
     echo "$DOCKER_REG_KEY exists, enabling access."
@@ -24,3 +23,4 @@ else
     echo "$DOCKER_REG_KEY does not exist. Cannot access Docker Registry."
 fi
 echo "ssh debian@${DOCKER_REG_IP} -i .ssh/docker-reg-priv" > ssh-docker-reg.sh && chmod +x ssh-docker-reg.sh
+docker login ${DOCKER_REG_IP}:${DOCKER_REG_PORT};

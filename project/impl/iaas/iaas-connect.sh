@@ -6,11 +6,11 @@ fi
 
 scp ${LOGIN}@${IAAS_HOST}:~/.profile ./
 
-if grep -q "source env/.env.iaas.sh" .profile; then
+if grep -q "source env/.env.docker.sh; source env/.env.iaas.sh" .profile; then
     echo "Environment ready, connecting..."    
 else
     cp .profile .profile_old
-    echo "source env/.env.iaas.sh" >> .profile
+    echo "source env/.env.docker.sh; source env/.env.iaas.sh" >> .profile
     echo "Updating .profile file for new environment..."
     scp .profile ${LOGIN}@${IAAS_HOST}:~/
 fi

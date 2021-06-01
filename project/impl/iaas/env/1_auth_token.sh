@@ -1,0 +1,2 @@
+PAYLOAD=`./0_payload_authentication.sh`
+export TOKEN=$(curl -i -H "Content-Type: application/json" -d "${PAYLOAD}" "${IDENTITY_SERVER}" | tee response.txt | grep X-Subject-Token | sed "s/X-Subject-Token: //")
