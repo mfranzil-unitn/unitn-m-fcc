@@ -1,0 +1,85 @@
+\documentclass[a4paper,11pt,hidelinks,twocolumn]{article}
+%\usepackage[a-1b]{pdfx}
+\usepackage{hyperref}
+
+\usepackage{subfiles}
+\usepackage{epsfig}
+\usepackage{plain}
+\usepackage{setspace}
+%\usepackage{minted}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathabx}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage[english]{babel}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=1.8cm]{geometry}
+\usepackage{titlesec} 
+\usepackage[utf8x]{inputenc} 
+
+\hypersetup{colorlinks=true, urlcolor=blue}
+
+\captionsetup{
+  justification=centering,
+  singlelinecheck=false,
+  font=small,labelfont=bf,labelsep=space}
+
+\begin{document}
+
+\pagenumbering{gobble} % nessuna numerazione
+
+\pagestyle{plain} 
+
+\begingroup
+
+\renewcommand{\cleardoublepage}{}
+\renewcommand{\clearpage}{}
+
+\titleformat{\section}
+{\normalfont\Large\bfseries}{\thesection}{1em}{}
+
+\titlespacing{\section}{0pt}{0.20in}{0.02in}
+\titlespacing{\subsection}{0pt}{0.10in}{0.02in}
+
+\newpage
+
+\title{Easy App Deployment Environment}
+\author{Fog and Cloud Computing 2021 - Group \texttt{19} \\    
+Claudio Facchinetti \texttt{<claudio.facchinetti@studenti.unitn.it>}\\
+Matteo Franzil \texttt{<matteo.franzil@studenti.unitn.it>}}
+\maketitle
+
+\section{Introduction}
+
+This document outlines the modifications applied to the final project from group \verb=19= for the \verb=FCC-21= course. Each section mirrors the ones from the draft, highlighting the differences and the issues found during the deployment.
+
+\section{Sample Application}
+
+The sample application was successfully Dockerized and updated to the latest Java and Tomcat versions. However, due to time constraints and the fact that it wasn't the central part of the project, more advanced features such as PDF generation and QR code generation were not fully tested and are not guaranteed to be functional. Additionally, email interaction has not been implemented. All the other features described in the GitHub repo (\url{https://github.com/mfranzil/centodiciotto}) are functional. In order to test them, you can use the following credentials:
+
+\begin{verbatim}
+ottavio.longhena@gmail.com
+ottavio.longhena
+\end{verbatim}
+
+\section{Platform as a Service}
+
+The PaaS side was implemented successfully. Everything is available through the \texttt{eval} user. The \textbf{web server} has 3 replicas (scalable), the \textbf{database} has a single pod and is not scalable (since \texttt{PSQL}) would need extra work for supporting distributed instances.
+
+Being a test infrastructure, we decided to implement a single Ingress listening on port \verb=80=, and the web server must be contacted using the \verb=$MASTER_IP$=. It is anyway available on port \verb=30130=, and the database on port \verb=30230=. These ports should never be exposed to an eventual web-facing IP.
+
+\section{Infrastructure as a Service}
+
+At the end, we decided not to implement a DNS resolver at all. 
+
+The local artifact manager is a Debian Buster instance which runs the Docker Registry v2 API and is available to both the IAAS and PAAS machines.
+
+The Resource Server was instead deployed using the official Swift API and is therefore available in the Object Storage section of the web portal. REST API requests are used for contacting it. We tried to use a Java library for addressing it, but it was too outdated so we settled on using old-fashioned HTTP requests, given the limited amount of requests made by the app itself.
+
+\endgroup
+
+\end{document}

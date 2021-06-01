@@ -1,9 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: centodiciotto-dev
   name: centodiciotto-psql
   labels:
     app: centodiciotto
+    component: psql
 spec:
   type: NodePort
   clusterIP: 10.96.60.230
@@ -14,13 +16,16 @@ spec:
      protocol: TCP
   selector:
    app: centodiciotto
+   component: psql
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: centodiciotto-dev
   name: centodiciotto-psql
   labels:
     app: centodiciotto
+    component: psql
 spec:
   replicas: 1
   selector:
@@ -30,9 +35,10 @@ spec:
     metadata:
       labels:
         app: centodiciotto
+        component: psql
     spec:
       imagePullSecrets:
-      - name: regcred
+      - name: secret-docker-cred
       containers:
         - name: centodiciotto-psql
           image: 172.24.4.144:8081/centodiciotto-psql:2.0.2
@@ -46,12 +52,12 @@ spec:
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: db-cred
+                  name: secret-sql-cred
                   key: username
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: db-cred
+                  name: secret-sql-cred
                   key: password
       volumes:
         - name: centodiciotto-psql-db

@@ -102,9 +102,9 @@ Possible targets:
 These are the ports used in the final config:
 
 ```shell
-: ${WS_PORT_EXT:=80} # Exposed port on the ingress
+: ${WS_PORT_EXT:=30130} # Exposed port on the ingress
 : ${WS_PORT_INT:=8080} # Internal tomcat port
-: ${SQL_PORT_EXT:=30100} # Exposed port on the nodeport
+: ${SQL_PORT_EXT:=30230} # Exposed port on the nodeport
 : ${SQL_PORT_INT:=5432} # Internal PSQL port
 ```
 
@@ -112,25 +112,13 @@ These are the ports used in the final config:
 
 These commands apply the configuration and the Ingress.
 
-For quick deletion of everything:
+For quick deletion of everything: see script in env folder.
 
-```shell
-kubectl delete deployment.apps ${WS_IMAGE}; kubectl delete deployment.apps ${SQL_IMAGE}; kubectl delete services ${WS_IMAGE}; kubectl delete services ${SQL_IMAGE}
-```
+For re-deploying everything: see script in env folder.
 
-For re-deploying everything
+For deleting pv/pvc: use the provided file in env folder.
 
-```shell
-kubectl apply -f sql-server-deployment.yml; kubectl apply -f web-server-deployment;
-```
-
-For deleting pv/pvc:
-
-```shell
-kubectl delete pv centodiciotto-psql-pv --grace-period=0 --force && kubectl patch pv centodiciotto-psql-pv -p '{"metadata": {"finalizers": null}}'
-```
-
-For rolling update, use the provided file.
+For rolling update, use the provided file in env folder.
 
 #### Web server details
 
