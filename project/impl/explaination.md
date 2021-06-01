@@ -83,6 +83,21 @@ docker login ${DOCKER_REG_IP}:${DOCKER_REG_PORT} # provide ${DOCKER_REG_USER}, $
 
 We can now push stuff to the Docker Registry using its IP and port as repository prefix. Please use the provided script.
 
+Docker Registry v2 has a good API. We can use it as following:
+
+```shell
+curl -v --silent -s -i -H "Content-Type: application/json; Accept: application/vnd.docker.distribution.manifest.v2+json" -u ${DOCKER_REG_USER}:${DOCKER_REG_PASSWORD} 
+```
+
+Possible targets:
+
+```shell
+-X GET https://***REMOVED***:8081/v2/_catalog/ -
+-X GET https://***REMOVED***:8081/v2/<image>/tags/list/ -i
+-X DELETE https://***REMOVED***:8081/v2/<image>/manifests/<reference>
+```
+
+
 ### PAAS-19
 
 These are the ports used in the final config:

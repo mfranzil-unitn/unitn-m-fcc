@@ -113,3 +113,16 @@ docker run -d -p 80:8080 --name c18 ${WS_IMAGE}:${CURRENT_VERSION}
 docker run -d -e "POSTGRES_PASSWORD=${SQL_PASSWORD} POSTGRES_USER=${SQL_USER}"  
         -p 5432:5432 --name sql ${SQL_IMAGE}:${CURRENT_VERSION}
 ```
+
+## Garbage collection of Docker Registry
+
+Please do this to delete something from the Docker Registry:
+
+```shell
+rm -r <root>/v2/repositories/${name}/_manifests/tags/${tag}/index/sha256/${hash}
+rm -r <root>/v2/repositories/${name}/_manifests/revisions/sha256/${hash}
+```
+
+```shell
+docker exec registry bin/registry garbage-collect --dry-run /etc/docker/registry/config.yml
+```

@@ -9,6 +9,7 @@ spec:
   storageClassName: manual
   capacity:
     storage: 1Gi
+  persistentVolumeReclaimPolicy: Delete
   accessModes:
     - ReadWriteMany
   hostPath:
