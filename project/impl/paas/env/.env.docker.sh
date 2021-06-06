@@ -4,7 +4,8 @@ export DOCKER_REG_PORT=8081
 # Credentials
 export DOCKER_REG_USER=***REMOVED***
 export DOCKER_REG_PASSWORD=***REMOVED***
-# Name of images
+# Name of images and namespaces
+export NAMESPACE=centodiciotto-dev
 export WS_IMAGE=centodiciotto-ws
 export SQL_IMAGE=centodiciotto-psql
 # Access to SQL server
