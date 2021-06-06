@@ -1,1 +1,0 @@
-kubectl delete deployment.apps -n centodiciotto-dev ${WS_IMAGE}; kubectl delete deployment.apps -n centodiciotto-dev ${SQL_IMAGE}; kubectl delete services -n centodiciotto-dev ${WS_IMAGE}; kubectl delete services -n centodiciotto-dev ${SQL_IMAGE};

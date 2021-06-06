@@ -1,0 +1,1 @@
+kubectl delete deployment.apps -n ${NAMESPACE} ${WS_IMAGE}; kubectl delete deployment.apps -n ${NAMESPACE} ${SQL_IMAGE}; kubectl delete services -n ${NAMESPACE} ${WS_IMAGE}; kubectl delete services -n ${NAMESPACE} ${SQL_IMAGE};

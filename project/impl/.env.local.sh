@@ -13,8 +13,7 @@ export LOGIN="$(printf "%s" ${EMAIL} | sed -e 's/@.*$//')" # The login will be t
 export IAAS_HOST="${IAAS_PREFIX}${GROUP_NUM}${LAB_DOMAIN}" # The host plus your group plus the course domain
 export PAAS_HOST="${PAAS_PREFIX}${GROUP_NUM}${LAB_DOMAIN}"
 # site names for completeness
-export IAAS_SITE=$(ssh ${LOGIN}@${IAAS_HOST} hostname) # iaas-19
-export PAAS_SITE=$(ssh ${LOGIN}@${PAAS_HOST} hostname) # paas-19
+#export IAAS_SITE=$(ssh ${LOGIN}@${IAAS_HOST} hostname) # iaas-19
+#export PAAS_SITE=$(ssh ${LOGIN}@${PAAS_HOST} hostname) # paas-19
 # Socks port
 export SOCKS_PORT=8888
-export ENV_SET=1
