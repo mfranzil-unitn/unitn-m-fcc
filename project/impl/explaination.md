@@ -24,7 +24,6 @@ The project is composed of the following structure:
         - Web Server Service/Deployment (10.96.60.130; ClusterIP 8080->80:30200/TCP; namespace default)
         - SQL Server Service/Deployment (10.96.60.230; NodePort 5432->5432:30100/TCP; namespace default)
         - NGINX Ingress (80/TCP; namespace ingress-nginx)
-  - Helm (project)
 
 ### Environment variables
 

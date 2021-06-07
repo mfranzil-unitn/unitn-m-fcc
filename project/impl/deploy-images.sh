@@ -1,8 +1,4 @@
 #!/bin/bash
-if [ -z "$ENV_SET" ]; then
-   echo "Please run local-env.sh";
-   exit;
-fi
 # Inserting version
 echo "Please insert the required version (current: ${CURRENT_VERSION:=none}):"
 read -r VERSION
