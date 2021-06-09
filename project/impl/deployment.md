@@ -31,7 +31,7 @@ ssh-keygen -t rsa -b 4096 -C "FCC21-group${GROUP_NUM} ${EVAL_ACC} key" -f "${EVA
 cat ${EVAL_ACC}.pub  | ssh ${LOGIN}@${PAAS_HOST} “sudo tee -a /home/${EVAL_ACC}/.ssh/authorized_keys”
 ```
 
-Passphrase: ${EVAL_ACC}-***REMOVED***-group${GROUP_NUM}
+Passphrase: ${EVAL_ACC}-fcc21-group${GROUP_NUM}
 
 ### Providing SSH keys to the IAAS::eval user
 

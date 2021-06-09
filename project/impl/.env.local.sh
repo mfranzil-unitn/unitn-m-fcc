@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-export LAB_DOMAIN=.***REMOVED***.fogx.me # Our lab domain
+export LAB_DOMAIN=REDACTED # Our lab domain
 export IAAS_PREFIX=iaas- # Our lab prefix
 export PAAS_PREFIX=paas- # Our lab prefix
 # asking for name
 echo "Who are you? [matteo.franzil/claudio.facchinetti]: "
 read -r NAME_INPUT
 export NAME=$NAME_INPUT
-export EMAIL=${NAME}@***REMOVED***  # Your unitn email as provided
+export EMAIL=${NAME}@REDACTED # Your unitn email as provided
 export GROUP_NUM=19 # Your group number
 export LOGIN="$(printf "%s" ${EMAIL} | sed -e 's/@.*$//')" # The login will be the local-part of your email address
 # some more stuff
