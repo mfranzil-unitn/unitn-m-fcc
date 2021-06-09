@@ -9,19 +9,19 @@
 
 The project is composed of the following structure:
 
-- IAAS-19 machine (10.235.11.219; SSH@22)
+- IAAS-19 machine (${IAAS_IP}; SSH@22)
   - OpenStack (adm. panel. HTTP@80)
     - Keystone, identity management (see below)
     - Swift, resource server (HTTP@8080)
     - Nova, compute instances
-      - Docker Registry (172.24.4.144; Docker@8081)
-- PAAS-19 machine (10.235.11.119; SSH@22)
+      - Docker Registry (${DOCKER_REG_IP}; Docker@8081)
+- PAAS-19 machine (${PAAS_IP}; SSH@22)
   - Docker (CLI only)
   - Kubernetes (CLI only)
     - Cluster
       - Control Plane (172.18.0.1)
       - Worker Node (172.18.0.2)
-        - Web Server Service/Deployment (10.96.60.130; ClusterIP 8080->80:30200/TCP; namespace default)
+        - Web Server Service/Deployment (10.96.60.130; ClusterIP 8080->8080:30200/TCP; namespace default)
         - SQL Server Service/Deployment (10.96.60.230; NodePort 5432->5432:30100/TCP; namespace default)
         - NGINX Ingress (80/TCP; namespace ingress-nginx)
 
@@ -66,9 +66,9 @@ curl -v --silent -s -i --insecure -H "Content-Type: application/json; Accept: ap
 Possible targets:
 
 ```shell
--X GET https://172.24.4.144:8081/v2/_catalog
--X GET https://172.24.4.144:8081/v2/<image>/tags/list
--X DELETE https://172.24.4.144:8081/v2/<image>/manifests/<reference>
+-X GET https://${DOCKER_REG_IP}:8081/v2/_catalog
+-X GET https://${DOCKER_REG_IP}:8081/v2/<image>/tags/list
+-X DELETE https://${DOCKER_REG_IP}:8081/v2/<image>/manifests/<reference>
 ```
 
 ### PAAS-19

@@ -1,4 +1,6 @@
 .vscode
+# Original files
+*.original
 
 ## Core latex/pdflatex auxiliary files:
 *.aux

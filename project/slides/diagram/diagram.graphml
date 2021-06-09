@@ -96,7 +96,7 @@
           <y:Fill color="#CCCCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#FFFFFF" fontFamily="Dialog" fontSize="8" fontStyle="plain" height="43.203125" horizontalTextPosition="center" iconTextGap="4" lineColor="#666699" modelName="sandwich" modelPosition="s" textColor="#000000" verticalTextPosition="bottom" visible="true" width="56.47265625" x="13.45954354277211" xml:space="preserve" y="62.484961718403326">IAAS-19
-10.235.11.219
+REDACTED
 :22 SSH
 :8888 SOCKS </y:NodeLabel>
           <y:SVGNodeProperties usingVisualBounds="true"/>
@@ -112,8 +112,8 @@
           <y:Geometry height="58.48496171840331" width="83.39174333554419" x="445.0571528467377" y="309.3443991407983"/>
           <y:Fill color="#CCCCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#FFFFFF" fontFamily="Dialog" fontSize="8" fontStyle="plain" height="33.40234375" horizontalTextPosition="center" iconTextGap="4" lineColor="#666699" modelName="sandwich" modelPosition="s" textColor="#000000" verticalTextPosition="bottom" visible="true" width="55.16015625" x="14.11579354277211" xml:space="preserve" y="62.484961718403326">PAAS-19
-10.235.11.119
+          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#FFFFFF" fontFamily="Dialog" fontSize="8" fontStyle="plain" height="33.40234375" horizontalTextPosition="center" iconTextGap="4" lineColor="#666699" modelName="sandwich" modelPosition="s" textColor="#000000" verticalTextPosition="bottom" visible="true" width="48.00390625" x="17.69391854277211" xml:space="preserve" y="62.484961718403326">PAAS-19
+REDACTED
 :22 SSH</y:NodeLabel>
           <y:SVGNodeProperties usingVisualBounds="true"/>
           <y:SVGModel svgBoundsPolicy="0">
@@ -129,7 +129,7 @@
           <y:Fill color="#CCCCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="33.40234375" horizontalTextPosition="center" iconTextGap="4" modelName="sandwich" modelPosition="s" textColor="#000000" verticalTextPosition="bottom" visible="true" width="60.90234375" x="12.85477189715101" xml:space="preserve" y="64.71832106459118">Docker Registry
-172.24.4.144
+REDACTED
 :8081 (API)</y:NodeLabel>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="8" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="13.80078125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="62.6875" x="11.96219377215101" xml:space="preserve" y="-17.80078125">Compute (Nova)<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.5" nodeRatioX="0.0" nodeRatioY="-0.5" offsetX="0.0" offsetY="-4.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:SVGNodeProperties usingVisualBounds="true"/>
@@ -395,7 +395,6 @@
       </data>
     </edge>
     <edge id="e11" source="n16" target="n0">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -406,7 +405,6 @@
       </data>
     </edge>
     <edge id="e12" source="n16" target="n15">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
